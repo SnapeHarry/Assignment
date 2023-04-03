@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="assignmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorymaster">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="categoryname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="productmasters">
+          <Key>
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="productid" Type="int" Nullable="false" />
+          <Property Name="productname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__productma__produ__1FCDBCEB">
+          <End Role="categorymaster" Type="Self.categorymaster" Multiplicity="1" />
+          <End Role="productmasters" Type="Self.productmasters" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="categorymaster">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="productmasters">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="assignmentModelStoreContainer">
+          <EntitySet Name="categorymaster" EntityType="Self.categorymaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productmasters" EntityType="Self.productmasters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__productma__produ__1FCDBCEB" Association="Self.FK__productma__produ__1FCDBCEB">
+            <End Role="categorymaster" EntitySet="categorymaster" />
+            <End Role="productmasters" EntitySet="productmasters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="assignmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorymaster">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="categoryname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productmaster" Relationship="Self.FK__productma__produ__1FCDBCEB" FromRole="categorymaster" ToRole="productmasters" />
+        </EntityType>
+        <EntityType Name="productmaster">
+          <Key>
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="productid" Type="Int32" Nullable="false" />
+          <Property Name="productname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categorymaster" Relationship="Self.FK__productma__produ__1FCDBCEB" FromRole="productmasters" ToRole="categorymaster" />
+        </EntityType>
+        <Association Name="FK__productma__produ__1FCDBCEB">
+          <End Role="categorymaster" Type="Self.categorymaster" Multiplicity="1" />
+          <End Role="productmasters" Type="Self.productmaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="categorymaster">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="productmasters">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="assignmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorymasters" EntityType="Self.categorymaster" />
+          <EntitySet Name="productmasters" EntityType="Self.productmaster" />
+          <AssociationSet Name="FK__productma__produ__1FCDBCEB" Association="Self.FK__productma__produ__1FCDBCEB">
+            <End Role="categorymaster" EntitySet="categorymasters" />
+            <End Role="productmasters" EntitySet="productmasters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="assignmentModelStoreContainer" CdmEntityContainer="assignmentEntities">
+          <EntitySetMapping Name="categorymasters">
+            <EntityTypeMapping TypeName="assignmentModel.categorymaster">
+              <MappingFragment StoreEntitySet="categorymaster">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="categoryname" ColumnName="categoryname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productmasters">
+            <EntityTypeMapping TypeName="assignmentModel.productmaster">
+              <MappingFragment StoreEntitySet="productmasters">
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="productname" ColumnName="productname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
