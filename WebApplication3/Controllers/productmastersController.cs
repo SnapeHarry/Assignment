@@ -26,8 +26,6 @@ namespace WebApplication3.Controllers
             ViewBag.CurrentPage = pageNumber;
             return View();
         }
-
-        // GET: productmasters/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,17 +39,11 @@ namespace WebApplication3.Controllers
             }
             return View(productmaster);
         }
-
-        // GET: productmasters/Create
         public ActionResult Create()
         {
             ViewBag.productid = new SelectList(db.categorymasters, "categoryId", "categoryname");
             return View();
         }
-
-        // POST: productmasters/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "productid,productname")] productmaster productmaster)
@@ -66,8 +58,6 @@ namespace WebApplication3.Controllers
             ViewBag.productid = new SelectList(db.categorymasters, "categoryId", "categoryname", productmaster.productid);
             return View(productmaster);
         }
-
-        // GET: productmasters/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,10 +72,6 @@ namespace WebApplication3.Controllers
             ViewBag.productid = new SelectList(db.categorymasters, "categoryId", "categoryname", productmaster.productid);
             return View(productmaster);
         }
-
-        // POST: productmasters/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "productid,productname")] productmaster productmaster)
@@ -99,8 +85,6 @@ namespace WebApplication3.Controllers
             ViewBag.productid = new SelectList(db.categorymasters, "categoryId", "categoryname", productmaster.productid);
             return View(productmaster);
         }
-
-        // GET: productmasters/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,8 +98,6 @@ namespace WebApplication3.Controllers
             }
             return View(productmaster);
         }
-
-        // POST: productmasters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -125,7 +107,6 @@ namespace WebApplication3.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
