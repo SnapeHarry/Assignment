@@ -55,9 +55,6 @@ namespace WebApplication3.Controllers
                 return HttpNotFound();
             }
             return View(category);
-
-            //var data = obje.categorymasters.Where(x => x.categoryId == id).FirstOrDefault();
-            //return View(data);
         }
         [HttpPost]
         public ActionResult edit([Bind(Include = "categoryId,categoryname")] categorymaster category)
@@ -70,14 +67,6 @@ namespace WebApplication3.Controllers
             }
             return View(category);
         }
-        //var data = obje.categorymasters.Where(x => x.categoryId == category.categoryId).FirstOrDefault();
-        //if(data!=null)
-        //{
-        //  data.categoryname = category.categoryname;
-        // obje.SaveChanges();
-
-        //            }
-        //          return RedirectToAction("index");
     
         public ActionResult Detail(int id)
         {
@@ -91,9 +80,6 @@ namespace WebApplication3.Controllers
             return HttpNotFound();
         }
         return View(category);
-
-        //var data = obje.categorymasters.Where(x => x.categoryId == id).FirstOrDefault();
-        //return View(data);
     }
         public ActionResult Delete(int id)
         {
@@ -117,11 +103,6 @@ namespace WebApplication3.Controllers
             obje.SaveChanges();
             return RedirectToAction("Index");
         }
-        //var data = obje.categorymasters.Where(x => x.categoryId == id).FirstOrDefault();
-        //obje.categorymasters.Remove(data);
-        //obje.SaveChanges();
-        //ViewBag.Messsage = "recordde delete sucessfully";
-        //return RedirectToAction("index");
         protected override void Dispose(bool disposing)
         {
             if (disposing)
